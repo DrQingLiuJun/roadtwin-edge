@@ -22,27 +22,25 @@ RoadTwin Edge 将相机视频转换为带目标 ID、类别、检测框和经纬
 
 ## 架构
 
-```mermaid
 flowchart LR
-    A[相机 HTTP MJPEG] --> B[采集线程\n仅保留最新帧]
-    B --> C[每相机工作进程]
-    C --> D[TensorRT 原生检测\nLetterbox + 稠密输出解码 + NMS]
-    D --> E[人/骑行者跨类去重]
-    E --> F[ByteTrack\n关联 + Kalman 状态估计]
-    F --> G[检测框接地点\n投影 + 局部标定 + 类别补偿]
-    G --> H[经纬度观测]
-    H --> I[UDP JSON]
-    I --> J[云端跨相机融合与动态地图]
-    H --> K[按需预览线程\n画框 + 水印 + 轨迹]
+    A["相机 HTTP MJPEG"] --> B["采集线程<br>仅保留最新帧"]
+    B --> C["每相机工作进程"]
+    C --> D["TensorRT 原生检测<br>Letterbox + 稠密输出解码 + NMS"]
+    D --> E["人/骑行者跨类去重"]
+    E --> F["ByteTrack<br>关联 + Kalman 状态估计"]
+    F --> G["检测框接地点<br>投影 + 局部标定 + 类别补偿"]
+    G --> H["经纬度观测"]
+    H --> I["UDP JSON"]
+    I --> J["云端跨相机融合与动态地图"]
+    H --> K["按需预览线程<br>画框 + 水印 + 轨迹"]
     K --> L["/dev/shm 最新画面"]
-    L --> M[独立 HTTP 预览服务]
-    N[selected_model.json\n模型目录 / 哈希 / 输入形状] --> D
-    O[受限 SSH ops_agent] --> N
-    O --> P[systemd 服务启停]
-    Q[资源遥测服务] --> R[本机资源与当前服务日志]
-    R --> S[Redis 独立 algo 命名空间]
-    S --> T[云端控制台资源卡片]
-```
+    L --> M["独立 HTTP 预览服务"]
+    N["selected_model.json<br>模型目录 / 哈希 / 输入形状"] --> D
+    O["受限 SSH ops_agent"] --> N
+    O --> P["systemd 服务启停"]
+    Q["资源遥测服务"] --> R["本机资源与当前服务日志"]
+    R --> S["Redis 独立 algo 命名空间"]
+    S --> T["云端控制台资源卡片"]
 
 ### 处理链路与模块职责
 

@@ -22,27 +22,9 @@ RoadTwin Edge 将相机视频转换为带目标 ID、类别、检测框和经纬
 
 ## 架构
 
-```mermaid
-flowchart LR
-    A[相机 HTTP MJPEG] --> B[采集线程\n仅保留最新帧]
-    B --> C[每相机工作进程]
-    C --> D[TensorRT 原生检测\nLetterbox + 稠密输出解码 + NMS]
-    D --> E[人/骑行者跨类去重]
-    E --> F[ByteTrack\n关联 + Kalman 状态估计]
-    F --> G[检测框接地点\n投影 + 局部标定 + 类别补偿]
-    G --> H[经纬度观测]
-    H --> I[UDP JSON]
-    I --> J[云端跨相机融合与动态地图]
-    H --> K[按需预览线程\n画框 + 水印 + 轨迹]
-    K --> L["/dev/shm 最新画面"]
-    L --> M[独立 HTTP 预览服务]
-    N[selected_model.json\n模型目录 / 哈希 / 输入形状] --> D
-    O[受限 SSH ops_agent] --> N
-    O --> P[systemd 服务启停]
-    Q[资源遥测服务] --> R[本机资源与当前服务日志]
-    R --> S[Redis 独立 algo 命名空间]
-    S --> T[云端控制台资源卡片]
-```
+![RoadTwin Edge 架构图：检测、跟踪、定位、预览、模型管理及资源遥测](docs/architecture/architecture.svg)
+
+[查看架构图原图](docs/architecture/architecture.svg) · [Mermaid 可编辑源文件](docs/architecture/architecture.mmd)
 
 ### 处理链路与模块职责
 
@@ -273,6 +255,8 @@ CPU 测试覆盖 manifest 路径/哈希/类别、输入宽高顺序、稠密输�
 每次修改项目文件或新增模型，必须在下方追加简短日期记录并随代码提交。`AGENTS.md`、贡献说明和 CI 共同约束；模型注册工具会自动记录。详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 更新日志
+
+- 2026-11-26：修复 README 架构图偶发无法显示；改为直接展示仓库内静态 SVG，保留可编辑 Mermaid 源文件，避免依赖富媒体组件加载。
 
 - 2026-11-26：整理为 RoadTwin Edge；将有效算法从日期发布目录移入固定 runtime，预览归入 preview；删除无引用备份、评估数据和构建中间文件，保留五个模型及其本机引擎；统一使用实际推理库，补齐导出/构建/注册/核验工具、开源配置模板、CI 与文档。
 - 2026-11-24：增加独立 Redis 资源上传服务，1 Hz 上报资源和各相机处理状态，支持云端控制台读取。

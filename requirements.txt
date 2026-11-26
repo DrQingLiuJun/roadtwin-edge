@@ -1,0 +1,5 @@
+numpy>=1.21,<2
+scipy>=1.8,<2
+Pillow>=9
+lap==0.5.12
+# OpenCV, CUDA and TensorRT use the Jetson system installation; do not pip-replace them.

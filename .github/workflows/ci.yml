@@ -1,0 +1,22 @@
+name: Source checks
+on: [push, pull_request]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Python syntax and unit tests
+        run: |
+          python -m compileall -q fenfa_gps.py ops_agent.py edge_tracker_config.py runtime preview edge_telemetry tools tests
+          python -m unittest discover -s tests -v
+      - name: Shell syntax
+        run: bash -n tools/build_engine.sh tools/build_runtime.sh
+      - name: Require README changelog
+        env:
+          CHANGE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python tools/check_changelog.py --base "$CHANGE_BASE"

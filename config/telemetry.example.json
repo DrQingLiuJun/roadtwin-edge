@@ -1,0 +1,14 @@
+{
+  "id": "edge-1",
+  "ip": "192.0.2.25",
+  "cameras": [
+    20,
+    21,
+    22
+  ],
+  "camera_kind": "rsu",
+  "redis_host": "192.0.2.80",
+  "redis_port": 31379,
+  "key": "algo:{roadtwin-edge-1}:state",
+  "ops_agent": "/home/nvidia/bushuchengxu/ops_agent.py"
+}

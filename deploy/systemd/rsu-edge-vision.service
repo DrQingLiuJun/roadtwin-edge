@@ -1,0 +1,21 @@
+[Unit]
+Description=RoadTwin Edge multi-camera perception
+After=network-online.target chrony.service
+Wants=network-online.target chrony.service
+
+[Service]
+Type=simple
+User=nvidia
+WorkingDirectory=/home/nvidia/bushuchengxu
+ExecStartPre=/usr/bin/chronyc waitsync 30 0.05 0 1
+ExecStart=/usr/bin/python3 -B -u /home/nvidia/bushuchengxu/fenfa_gps.py
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+KillSignal=SIGINT
+KillMode=control-group
+TimeoutStopSec=30
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

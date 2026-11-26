@@ -1,0 +1,19 @@
+[Unit]
+Description=RoadTwin edge resources to Redis (1 Hz)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nvidia
+WorkingDirectory=/home/nvidia/bushuchengxu/edge_telemetry
+ExecStart=/usr/bin/python3 -B -u /home/nvidia/bushuchengxu/edge_telemetry/publisher.py
+Restart=always
+RestartSec=3
+TimeoutStopSec=10
+Nice=10
+UMask=0022
+Environment=PYTHONDONTWRITEBYTECODE=1
+
+[Install]
+WantedBy=multi-user.target

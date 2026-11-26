@@ -1,0 +1,22 @@
+[Unit]
+Description=RoadTwin Edge detection preview
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nvidia
+WorkingDirectory=/home/nvidia/bushuchengxu
+ExecStart=/usr/bin/python3 -B -u /home/nvidia/bushuchengxu/preview/server.py
+Environment=PYTHONDONTWRITEBYTECODE=1
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=8
+NoNewPrivileges=true
+ProtectSystem=full
+UMask=0027
+MemoryMax=256M
+TasksMax=96
+
+[Install]
+WantedBy=multi-user.target

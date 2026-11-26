@@ -1,0 +1,3 @@
+ultralytics==8.4.41
+onnx>=1.14,<2
+# Match the training checkpoint version when rebuilding other model families.

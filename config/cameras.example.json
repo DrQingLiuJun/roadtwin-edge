@@ -1,0 +1,344 @@
+[
+  {
+    "camera_id": 20,
+    "host": "192.0.2.20",
+    "port": 8081,
+    "path": "/video/mjpeg",
+    "target_ip": "192.0.2.100",
+    "target_port": 3456,
+    "calibration": {
+      "matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "north_angle_deg": 0,
+      "gps": {
+        "lat": 0.0,
+        "lon": 0.0
+      }
+    },
+    "tracker": {
+      "max_lost": 30,
+      "high_thresh": 0.3,
+      "low_thresh": 0.1,
+      "match_thresh": 0.85
+    }
+  },
+  {
+    "camera_id": 21,
+    "host": "192.0.2.21",
+    "port": 8081,
+    "path": "/video/mjpeg",
+    "target_ip": "192.0.2.100",
+    "target_port": 3456,
+    "calibration": {
+      "matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "north_angle_deg": 0,
+      "gps": {
+        "lat": 0.0,
+        "lon": 0.0
+      }
+    },
+    "tracker": {
+      "max_lost": 30,
+      "high_thresh": 0.3,
+      "low_thresh": 0.1,
+      "match_thresh": 0.85
+    }
+  },
+  {
+    "camera_id": 22,
+    "host": "192.0.2.22",
+    "port": 8081,
+    "path": "/video/mjpeg",
+    "target_ip": "192.0.2.100",
+    "target_port": 3456,
+    "calibration": {
+      "matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "north_angle_deg": 0,
+      "gps": {
+        "lat": 0.0,
+        "lon": 0.0
+      }
+    },
+    "tracker": {
+      "max_lost": 30,
+      "high_thresh": 0.3,
+      "low_thresh": 0.1,
+      "match_thresh": 0.85
+    }
+  },
+  {
+    "camera_id": 23,
+    "host": "192.0.2.23",
+    "port": 8081,
+    "path": "/video/mjpeg",
+    "target_ip": "192.0.2.100",
+    "target_port": 3456,
+    "calibration": {
+      "matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "north_angle_deg": 0,
+      "gps": {
+        "lat": 0.0,
+        "lon": 0.0
+      }
+    },
+    "tracker": {
+      "max_lost": 30,
+      "high_thresh": 0.5,
+      "low_thresh": 0.1,
+      "match_thresh": 0.7
+    }
+  },
+  {
+    "camera_id": 29,
+    "host": "192.0.2.29",
+    "port": 8081,
+    "path": "/video/mjpeg",
+    "target_ip": "192.0.2.100",
+    "target_port": 3456,
+    "calibration": {
+      "matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "north_angle_deg": 0,
+      "gps": {
+        "lat": 0.0,
+        "lon": 0.0
+      }
+    },
+    "tracker": {
+      "max_lost": 30,
+      "high_thresh": 0.5,
+      "low_thresh": 0.1,
+      "match_thresh": 0.7
+    }
+  },
+  {
+    "camera_id": 30,
+    "host": "192.0.2.30",
+    "port": 8081,
+    "path": "/video/mjpeg",
+    "target_ip": "192.0.2.100",
+    "target_port": 3456,
+    "calibration": {
+      "matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "north_angle_deg": 0,
+      "gps": {
+        "lat": 0.0,
+        "lon": 0.0
+      }
+    },
+    "tracker": {
+      "max_lost": 30,
+      "high_thresh": 0.5,
+      "low_thresh": 0.1,
+      "match_thresh": 0.7
+    }
+  },
+  {
+    "camera_id": 31,
+    "host": "192.0.2.31",
+    "port": 8081,
+    "path": "/video/mjpeg",
+    "target_ip": "192.0.2.100",
+    "target_port": 3456,
+    "calibration": {
+      "matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "north_angle_deg": 0,
+      "gps": {
+        "lat": 0.0,
+        "lon": 0.0
+      }
+    },
+    "tracker": {
+      "max_lost": 30,
+      "high_thresh": 0.5,
+      "low_thresh": 0.1,
+      "match_thresh": 0.7
+    }
+  },
+  {
+    "camera_id": 32,
+    "host": "192.0.2.32",
+    "port": 8081,
+    "path": "/video/mjpeg",
+    "target_ip": "192.0.2.100",
+    "target_port": 3456,
+    "calibration": {
+      "matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "north_angle_deg": 0,
+      "gps": {
+        "lat": 0.0,
+        "lon": 0.0
+      }
+    },
+    "tracker": {
+      "max_lost": 30,
+      "high_thresh": 0.5,
+      "low_thresh": 0.1,
+      "match_thresh": 0.7
+    }
+  },
+  {
+    "camera_id": 33,
+    "host": "192.0.2.33",
+    "port": 8081,
+    "path": "/video/mjpeg",
+    "target_ip": "192.0.2.100",
+    "target_port": 3456,
+    "calibration": {
+      "matrix": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "north_angle_deg": 0,
+      "gps": {
+        "lat": 0.0,
+        "lon": 0.0
+      }
+    },
+    "tracker": {
+      "max_lost": 30,
+      "high_thresh": 0.5,
+      "low_thresh": 0.1,
+      "match_thresh": 0.7
+    }
+  }
+]

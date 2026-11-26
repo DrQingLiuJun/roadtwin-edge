@@ -1,0 +1,9 @@
+{
+  "portal_url": "",
+  "edges": {
+    "edge-1": {"url": "http://192.0.2.25:8083", "cameras": [20, 21, 22]},
+    "edge-2": {"url": "http://192.0.2.26:8083", "cameras": [23, 29, 30]},
+    "edge-3": {"url": "http://192.0.2.27:8083", "cameras": [31, 32, 33]}
+  },
+  "camera_sources": {}
+}

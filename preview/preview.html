@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>路侧感知 · 检测实时画面</title>
+<style>
+:root{color-scheme:dark;--bg:#0c1319;--card:#141f28;--line:#2a3b47;--text:#e8f0f4;--muted:#8da6b6;--green:#82d8b4;--red:#f18e94}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 95% 0,#15332f55,transparent 45%),var(--bg);font:14px/1.6 system-ui,"Noto Sans CJK SC","Microsoft YaHei",sans-serif;color:var(--text)}
+main{max-width:1800px;margin:auto;padding:32px 28px 40px}header{display:flex;gap:18px;align-items:center;justify-content:space-between;margin-bottom:22px}h1{margin:4px 0;font-size:28px;letter-spacing:.03em;font-weight:600}.eyebrow{font-size:13px;letter-spacing:.25em;color:var(--green)}p{color:var(--muted);margin:5px 0}.nav{display:flex;gap:10px;flex-wrap:wrap}button,a.button{font:inherit;color:var(--text);border:1px solid var(--line);border-radius:10px;background:#192731;padding:9px 15px;cursor:pointer;text-decoration:none}button:hover,a.button:hover{border-color:var(--green);background:#203a38}button.primary{background:#244b40;border-color:#467f6a;color:#b7f1d8}.strip{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:22px;padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:#12201f66;font-size:14px;color:var(--muted)}.strip b{color:var(--text);font-weight:500}.legend{margin-left:auto;display:flex;gap:14px}.legend span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:3px;margin-right:6px;background:var(--c)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.grid.single{grid-template-columns:1fr;max-width:1600px;margin:auto}.card{overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 26px #0002}.card header{padding:13px 16px;margin:0;gap:5px}.title{font-size:19px;font-weight:600}.sub{font-size:13px;color:var(--muted);margin-left:10px}.badge{white-space:nowrap;font-size:13px;padding:3px 8px;border:1px solid #3c4a55;border-radius:20px;color:var(--muted)}.badge.live{color:var(--green);border-color:#416a5b;background:#24483c66}.badge.error{color:var(--red);border-color:#6b4249;background:#4b252a55}.badge:before{content:"";display:inline-block;background:currentColor;width:6px;height:6px;border-radius:50%;margin-right:6px}.view{position:relative;background:#080f14;aspect-ratio:16/9;overflow:hidden}.view img{display:block;width:100%;height:100%;object-fit:contain}.view img.stale{opacity:.32}.notice{position:absolute;inset:0;display:grid;place-items:center;color:#b4c7d3;background:#07101855;font-size:15px;pointer-events:none}.notice.hidden{display:none}.bottom{padding:10px 15px;display:flex;gap:12px;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}.bottom a{color:#a2c8d9;text-decoration:none}.bottom a:hover{color:var(--green)}.actions{display:flex;gap:14px;white-space:nowrap}.foot{font-size:14px;margin-top:22px;color:var(--muted)}
+@media(max-width:1050px){main{padding:22px 18px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.legend{margin-left:0}.sub{display:none}}@media(max-width:640px){header{align-items:flex-start;flex-direction:column}h1{font-size:25px}.grid{grid-template-columns:1fr}.strip{gap:10px 18px}.nav button,.nav a{font-size:14px;padding:8px 12px}}
+</style>__PORTAL_STYLES__<style>
+
+body,button,a{font-family:"PortalArial",Arial,"PortalYaHei","Microsoft YaHei",sans-serif}body{font-size:16px}body>main{max-width:none;padding:0;display:flex;flex-direction:column}body>main>#grid{order:0;width:100%;height:100dvh;min-height:0;max-width:none;margin:0;padding:0;gap:4px;grid-auto-rows:minmax(0,1fr)}body>main>header{order:1;padding:14px 18px;margin:0}body>main>.strip{order:2;margin:0 12px;padding:10px 14px}body>main>.foot{order:3;margin:12px 18px}.card{display:flex;flex-direction:column;min-width:0;min-height:0;border-radius:0;box-shadow:none}.card>.view{order:0;flex:1;min-height:0;aspect-ratio:auto}.card>header{order:1;flex:none;padding:6px 10px;flex-direction:row;align-items:center}.card>.bottom{order:2;flex:none;padding:5px 10px;flex-wrap:wrap;gap:5px}.card .view img{width:100%;height:100%;object-fit:contain}.single-page .card>header,.single-page .card>.bottom{display:none}.single-page .card-details{display:flex;padding:8px 18px;justify-content:space-between;gap:12px;flex-wrap:wrap}.view .fullscreen{position:absolute;right:10px;top:10px;z-index:3;font-size:14px;padding:5px 9px;border-radius:5px;background:#102030b3}.view:fullscreen{width:100vw;height:100vh}.view:fullscreen img{object-fit:fill}.overview-page .title{font-size:16px}.overview-page .sub,.overview-page .bottom,.overview-page .badge{font-size:12px}.overview-page .bottom .metrics{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}.overview-page .bottom .actions{flex-shrink:0}.overview-page .bottom{flex-wrap:nowrap}.card-details .title{font-size:18px}.card-details .metrics{font-size:14px}.card-details .badge{font-size:13px}.card-details{order:1}body>main>header{order:2}body>main>.strip{order:3}body>main>.foot{order:4}@media(max-width:640px){body>main>#grid:not(.single){grid-template-columns:repeat(2,minmax(0,1fr))}.overview-page .card>header{padding:3px 5px}.overview-page .title{font-size:14px}.overview-page .bottom{display:none}.overview-page .badge{font-size:12px;padding:2px 5px}.nav button,.nav a{font-size:14px}.single-page .card-details{padding:8px 10px}}
+</style><style>.single-page #grid.single{height:auto;display:block}.single-page .card{border:0}.single-page .card>.view{height:100dvh;flex:none}.single-page .card>header,.single-page .card>.bottom{display:flex}</style><style>
+/* The nine-camera wall reserves every tile for video; identification floats above it. */
+.nine-overview #grid>.card{position:relative;overflow:hidden}.nine-overview .card>.bottom{display:none}.nine-overview .card>.view{flex:1;min-height:0;width:100%;height:100%}.nine-overview .card>.view img{object-fit:fill}.nine-overview .card>header{position:absolute;inset:0 0 auto;z-index:4;display:flex;align-items:flex-start;gap:8px;margin:0;padding:8px 84px 8px 10px;background:none;box-shadow:none;pointer-events:none}.nine-overview .card>header>div{min-width:0;padding:3px 6px;border-radius:4px;background:#08131ab3}.nine-overview .card>header .badge{flex-shrink:0;margin-top:3px}.nine-overview .card>.view .fullscreen{top:8px;right:8px}@media(max-width:650px){.nine-overview .card>header{padding:6px 66px 6px 6px}.nine-overview .card>header .badge{display:none}.nine-overview .card>.view .fullscreen{font-size:12px;padding:4px 6px}.nine-overview .card>header .title{font-size:14px}}
+</style><style>.nine-overview .card>header{inset:auto auto 8px 10px;padding:0;display:block;width:auto;max-width:calc(100% - 20px);background:none;box-shadow:none}.nine-overview .card>header>div{padding:0;background:none;border-radius:0}.nine-overview .card>header .sub,.nine-overview .card>header .badge{display:none}.nine-overview .card>header .title{font-size:16px;font-weight:600;text-shadow:none}@media(max-width:650px){.nine-overview .card>header{inset:auto auto 6px 6px}.nine-overview .card>header .title{font-size:14px}}</style><style>.view canvas{display:block;width:100%;height:100%;object-fit:contain}.view canvas[hidden],.view img[hidden]{display:none}.nine-overview .view canvas,.view:fullscreen canvas{object-fit:fill}.view .notice{inset:auto 8px 38px;padding:5px 8px;display:block;text-align:center;background:#071018bf;border-radius:5px;font-size:14px}.view .notice.hidden{display:none}</style></head><body><main>
+<header><div><div class="eyebrow">ROADSIDE PERCEPTION / LIVE DETECTION</div><h1 id="heading">九路检测实时画面</h1><p>直接查看边缘模型输出 · 检测框、类别、置信度与跟踪编号</p></div><nav class="nav"><a class="button" href="/all">九路总览</a><a class="button" href="/">本机三路</a><button id="pause" class="primary">暂停预览</button></nav></header>
+<div class="strip"><span>模型 <b id="modelLabel">正在读取模型</b></span><span>预览 <b>总览自适应 · 单路720P</b></span><span>状态 <b id="total">正在连接</b></span><div class="legend"><span style="--c:#73dc64">行人 Person</span><span style="--c:#ffbe28">骑行者 Rider</span><span style="--c:#50aaf5">汽车 Car</span><span style="--c:#e16ed7">卡车 Truck</span></div></div>
+<div id="grid" class="grid"></div>
+<p class="foot">画面与框来自同一次推理，框对应已过滤并上报的跟踪目标。仅观看时编码；暂停或切换到后台会停止本页面的视频请求。接收延迟不包含摄像头内部采集延迟。</p>
+</main><script src="/preview-player.js?v=20261119-1"></script><script>
+const localCameras=__LOCAL_CAMERAS__,fleet=__FLEET_CONFIG__,groups=Object.fromEntries(Object.entries(fleet.edges).map(([id,edge])=>[id,edge.cameras]));
+const owner=c=>Object.keys(groups).find(k=>groups[k].includes(c)),base=c=>fleet.edges[owner(c)].url||location.origin;
+const single=location.pathname.match(/^\/camera\/(\d+)$/),all=location.pathname==='/all',cameras=single?[Number(single[1])]:all?Object.values(groups).flat():localCameras;
+if(cameras.some(c=>!owner(c)))throw Error('未知相机编号');
+document.body.classList.add(single?'single-page':'overview-page');if(all)document.body.classList.add('nine-overview');
+if(single)document.querySelector('#grid').classList.add('single');
+document.querySelector('#heading').textContent=single?`${cameras[0]}号相机 · 检测实时画面`:all?'九路实时画面':'本机三路 · 检测实时画面';
+document.querySelector('.foot').textContent='完整帧解码后显示，短暂断流保留最后画面并自动重连；总览随可用带宽调整预览清晰度，单路和全屏优先高清。检测停止时总览切换原始视频。';
+const cards=new Map(),edgeModels=new Map();let paused=false,polling=false;
+function active(){return !paused&&!document.hidden;}
+function profile(state){return single||document.fullscreenElement===state.view?'native':all?'compact':'wall';}
+function notice(state,text){state.notice.textContent=text;state.notice.classList.toggle('hidden',!text);}
+function summary(){const live=[...cards.values()].filter(s=>s.mode==='raw'?s.rawReady:s.player.lastFrame&&performance.now()-s.player.lastFrame<2500).length;document.querySelector('#total').textContent=active()?`${live} / ${cards.size} 路实时`:'预览已暂停';}
+function start(state){
+ if(!active())return;
+ if(state.mode==='detection'){state.image.hidden=true;state.canvas.hidden=false;state.player.start(profile(state));}
+ else if(!state.image.getAttribute('src')){state.player.stop();state.canvas.hidden=true;state.image.hidden=false;state.image.src=(fleet.camera_sources[String(state.cam)]||'')+(String(fleet.camera_sources[String(state.cam)]||'').includes('?')?'&':'?')+`t=${Date.now()}`;}
+}
+function choose(state,mode){
+ if(state.mode===mode)return;state.player.stop();clearTimeout(state.retry);state.image.removeAttribute('src');state.rawReady=false;state.mode=mode;state.el.dataset.videoMode=mode;notice(state,mode==='detection'?'正在连接带框画面…':'正在连接原始画面…');start(state);
+}
+for(const cam of cameras){
+ const el=document.createElement('section');el.className='card';
+ el.innerHTML=`<header><div><span class="title">${cam}号相机</span><span class="sub">${new URL(base(cam)).hostname} · ${owner(cam)}</span></div><span class="badge">等待连接</span></header><div class="view"><button class="fullscreen" type="button">⛶ 全屏</button><canvas aria-label="${cam}号相机检测视频" width="1280" height="720"></canvas><img alt="${cam}号相机原始视频" hidden><div class="notice">正在连接带框画面…</div></div><div class="bottom"><span class="metrics">等待实时帧</span><span class="actions"><a target="_blank" rel="noopener" href="${base(cam)}/camera/${cam}">单路放大 ↗</a><a target="_blank" rel="noopener" href="${base(cam)}/stream/${cam}.mjpg">视频流 ↗</a></span></div>`;
+ document.querySelector('#grid').append(el);
+ const state={cam,el,view:el.querySelector('.view'),canvas:el.querySelector('canvas'),image:el.querySelector('img'),notice:el.querySelector('.notice'),badge:el.querySelector('.badge'),metrics:el.querySelector('.metrics'),mode:null,rawReady:false};
+ state.player=new DetectionPlayer(state.canvas,`${base(cam)}/stream/${cam}.mjpg`,(phase,player)=>{
+  if(state.mode!=='detection')return;state.badge.className='badge '+(phase==='live'?'live':'');state.badge.textContent=phase==='live'?'实时检测':'自动重连';
+  notice(state,phase==='live'?'':player.lastFrame?'信号中断 · 保留最后画面，正在重连…':'正在连接带框画面…');
+  if(phase==='live')state.metrics.textContent=`${state.model||'检测跟踪'} · ${state.canvas.width}×${state.canvas.height} · ${state.objects??'-'} 个目标`;
+ });
+ state.image.onload=()=>{state.rawReady=true;notice(state,'');};state.image.onerror=()=>{if(state.mode!=='raw'||!active())return;notice(state,'原始画面连接中，自动重试…');clearTimeout(state.retry);state.retry=setTimeout(()=>{state.image.removeAttribute('src');start(state);},2000);};
+ el.querySelector('.fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await state.view.requestFullscreen();}catch{}};
+ cards.set(cam,state);choose(state,'detection');
+}
+window.previewPlayers=cards;
+async function refresh(){
+ if(polling||!active())return;polling=true;
+ try{
+  const routePromise=all&&fleet.portal_url?fetch(fleet.portal_url.replace(/\/$/,'')+'/api/video-routing',{cache:'no-store',signal:AbortSignal.timeout(4000)}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>data.cameras||{}).catch(()=>null):Promise.resolve(null);
+  const statusPromise=Promise.all([...new Set(cameras.map(owner))].map(async edge=>{
+   try{const r=await fetch((fleet.edges[edge].url||location.origin)+'/api/status',{cache:'no-store',signal:AbortSignal.timeout(4000)});if(!r.ok)return;const data=await r.json();edgeModels.set(edge,data.model?.name||'unknown');for(const row of data.cameras){const state=cards.get(row.camera);if(state){state.model=`${row.model} ${row.precision}`;state.objects=row.objects;}}}catch{}
+  }));
+  const [routes]=await Promise.all([routePromise,statusPromise]);
+  if(routes)for(const [cam,state] of cards){if(routes[String(cam)]===false&&fleet.camera_sources[String(cam)])choose(state,'raw');else if(routes[String(cam)]===true)choose(state,'detection');}
+  document.querySelector('#modelLabel').textContent=[...new Set(edgeModels.values())].join(' / ')+' · TensorRT FP16';
+ }finally{polling=false;}
+}
+function visibility(){
+ for(const state of cards.values())if(active())start(state);else{state.player.stop();clearTimeout(state.retry);state.image.removeAttribute('src');notice(state,'预览已暂停');}
+ document.querySelector('#pause').textContent=paused?'继续预览':'暂停预览';if(active())refresh();summary();
+}
+document.querySelector('#pause').onclick=()=>{paused=!paused;visibility();};document.addEventListener('visibilitychange',visibility);
+document.addEventListener('fullscreenchange',()=>{for(const state of cards.values())if(state.mode==='detection'&&active())state.player.start(profile(state));});
+window.addEventListener('pagehide',()=>{for(const state of cards.values())state.player.stop();});
+refresh();setInterval(refresh,4000);setInterval(summary,1000);
+</script></body></html>

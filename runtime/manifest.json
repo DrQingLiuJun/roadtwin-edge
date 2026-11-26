@@ -1,0 +1,38 @@
+{
+  "source_sha256": "09bdf273f42ead7b0835caf374a5a5bddc17be10136028227ae83de55a6f44bf",
+  "tracker_version": "ultralytics-8.3.0",
+  "lap_version": "0.5.12",
+  "camera_map": {
+    "20": 1,
+    "21": 2,
+    "22": 3,
+    "23": 4,
+    "29": 5,
+    "30": 6,
+    "31": 7,
+    "32": 8,
+    "33": 9
+  },
+  "wire_class_map": {
+    "0": 0,
+    "1": 2,
+    "2": 1,
+    "3": 7
+  },
+  "tracker": {
+    "track_buffer": 30,
+    "track_high_thresh": 0.5,
+    "track_low_thresh": 0.1,
+    "match_thresh": 0.8,
+    "fuse_score": true,
+    "new_track_thresh": 0.6
+  },
+  "detector": {
+    "weights": "selected_model.json",
+    "confidence": 0.25,
+    "nms_iou": 0.7,
+    "max_det": 300,
+    "input_shape_source": "selected_model.json and TensorRT binding dimensions"
+  },
+  "deployment_scope": "all nine active cameras, distributed by active_cameras.json"
+}
